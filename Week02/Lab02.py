@@ -10,6 +10,7 @@ playerChoice = int(playerChoice)
 if playerChoice < 1 or playerChoice > 3: 
     print("Error: Choice should be between 1 and 3!")
 else: 
+    #Develop the game logic using if/else/elif
     computerChoice = random.randint(1, 3)
 
     if playerChoice == computerChoice:
@@ -22,7 +23,7 @@ else:
         print("Scissors beats Paper - You win!")
     else:
         print("You lose!")
-        
+
 
 
 
