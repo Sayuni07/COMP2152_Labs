@@ -9,3 +9,5 @@ print(f"Lowest grade: {grades[0]}")
 print(f"Total number of grades: {len(grades)}")
 
 
+
+
