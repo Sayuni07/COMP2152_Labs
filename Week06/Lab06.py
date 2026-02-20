@@ -1,7 +1,7 @@
 # ============================================================
 #  WEEK 06 LAB: NETWORK DIAGNOSTIC LOGGER
 #  COMP2152 — Windows Version
-#  [Your Name Here]
+#  Sayuni Wimaladharma
 # ============================================================
 #
 #  This program runs network commands (ping, nslookup, ipconfig),
@@ -199,16 +199,18 @@ def write_to_log(filename, entry):
     """Append a log entry to a text file."""
     # *** YOUR CODE HERE ***
     # Open the file in append mode ("a") using a with statement
+    with open(filename, "a")as file:
     # Write the entry + "\n" to the file
-    pass
+        file.write(entry + "\n")
 
 
 def read_log(filename):
     """Read and return the entire contents of a log file."""
     # *** YOUR CODE HERE ***
     # Open the file in read mode ("r") using a with statement
+    with open(filename, "r") as file:
     # Return the result of file.read()
-    pass
+        return file.read()
 
 
 # This function is COMPLETE — it uses write_to_log() above
@@ -244,18 +246,24 @@ def log_to_csv(filename, command, target, result, status):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     # *** YOUR CODE HERE ***
     # Open filename in append mode ("a") with newline=""
+    with open(filename, "a", newline="") as file:
+        writer = csv.writer(filename)
     # Create a csv.writer(file)
+        writer.writerow([timestamp, command, target, result, status])
     # Write one row: [timestamp, command, target, result, status]
-    pass
+    
 
 
 def read_csv_log(filename):
     """Read and display all rows from the CSV log file."""
     # *** YOUR CODE HERE ***
     # Open filename in read mode ("r") with newline=""
+    with open(filename, "r", newline="") as file:
+        reader = csv.reader(file)
     # Create a csv.reader(file)
     # Loop through rows and print: " | ".join(row)
-    pass
+        for row in reader:
+            print(" | ".join(row))
 
 
 # This function is COMPLETE — it uses the CSV functions above
@@ -357,7 +365,20 @@ def safe_read_log(filename):
     #     return ""
     # finally:
     #     print "Log read attempt completed."
-    pass
+    try:
+        with open(filename, "r") as file:
+            content = file.read()
+            if content == "":
+                print("log file is empty.")
+                return ""
+            else:
+                return content
+    except FileNotFoundError:
+        print("No log file found. Run a diagnostic first.")
+        return ""
+    finally:
+        print("Log read attempt completed.")    
+   
 
 
 def get_valid_input(prompt, valid_options):
@@ -525,5 +546,5 @@ def main():
 #  TEST YOUR WORK
 # ============================================================
 # After completing Tasks 1-3, uncomment the line below to run:
-# main()
+main()
 # ============================================================
