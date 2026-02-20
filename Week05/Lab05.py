@@ -200,7 +200,6 @@ def binary_search_recursive(nums, target, left, right):
     # Hint: return binary_search_recursive(nums, target, mid + 1, right)
 
 
-
 # Wrapper function for recursive solution
 def search_recursive(nums, target):
     """Wrapper function to call recursive binary search."""
